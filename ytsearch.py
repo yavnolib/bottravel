@@ -1,6 +1,6 @@
-from youtube_search_and_download import YouTubeHandler
+from youtube_searc_and_download import YouTubeHandler
  
-search_key = 'chinese top ktv' #keywords
+search_key = 'путин' #keywords
 yy = YouTubeHandler(search_key)
 yy.download_as_audio =0 # 1- download as audio format, 0 - download as video
 yy.set_num_playlist_to_extract(5) # number of playlist to download
