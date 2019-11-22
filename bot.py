@@ -23,7 +23,6 @@ keyboard1.row('/start', '/help', '/weather', '/rzd', 'Казань', 'Москв
 keyboard1.row('/music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
-Token = '992699822:AAFELsU-hkBdSSqzTln_lCLpldaBRecvcSE'
 bot = telebot.TeleBot(Token)
 
 fromplace = str()
