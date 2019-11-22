@@ -7,10 +7,11 @@ import requests
 from mqtt import *
 import datetime
 import reader
-import os, dotenv
+import os
+from dotenv import load_dotenv
 
-token=dotenv.find_dotenv()
-token = os.environ['TOKEN']
+token=load_dotenv()
+token = os.getenv('TOKEN')
 print(token)
 
 commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/rzd' : 'rzd_message(message)', '/weather' : 'weather_message(message)'}
