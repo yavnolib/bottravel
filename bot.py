@@ -83,7 +83,7 @@ def weather_message(message):
     bot.send_message(message.chat.id, 'Ну давай')
     bot.register_next_step_handler(message, weather_information)
 def weather_information(message):
-    place:str
+    place=''
     global status
     global angrystickerpack
     if message.text not in commandlist:
