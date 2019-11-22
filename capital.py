@@ -3,7 +3,7 @@ class Search_capital:
         	self.searchIn=search
 	def search(self):	
 		a=self.searchIn
-		file=open(r'C:\Users\User\Desktop\test\templates\base_date_city.txt','r',encoding='UTF-8')
+		file=open('base_date_city.txt','r',encoding='UTF-8')
 		for line in file:
 			if a in line:
 			    capital=line[0:line.index(':')]
