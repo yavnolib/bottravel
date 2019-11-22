@@ -1,4 +1,4 @@
-from youtube_searc_and_download import YouTubeHandler
+from yotube_searc_and_download import YouTubeHandler
  
 search_key = 'путин' #keywords
 yy = YouTubeHandler(search_key)
