@@ -112,7 +112,7 @@ class YouTubeHandler(object):
             url = URL(url_target)
             dom_object = DOM(url.download(cached=True))
         except:
-            print 'Problem retrieving data for this url: ', self.target_url_str
+            print ('Problem retrieving data for this url: ', self.target_url_str)
             self.url_query_timeout = 1
 
         return(dom_object)      
