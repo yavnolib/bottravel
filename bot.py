@@ -63,6 +63,9 @@ def date_registration(message):
     if message.text not in commandlist:
         dateregistration = message.text
         bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
+        print(fromplace)
+        print(toplace)
+        print(dateregistration)
         Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
         bot.send_message(message.chat.id, 'Железнодорожные маршруты по вашим требованиям: '+"\n"+reader.read())
     else:
