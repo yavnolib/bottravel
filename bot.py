@@ -9,8 +9,7 @@ import datetime
 import reader
 import os, dotenv
 
-
-dotend.load_dotenv()
+token=dotenv.find_dotenv()
 token = os.environ['TOKEN']
 print(token)
 
