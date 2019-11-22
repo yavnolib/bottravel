@@ -29,7 +29,7 @@ bot = telebot.TeleBot(Token)
 fromplace = str()
 toplace = str()
 dateregistration = str()
-status:str
+status=''
 
 @bot.message_handler(commands=['rzd'])
 
