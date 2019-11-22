@@ -10,7 +10,7 @@ import reader
 import os, dotenv
 
 
-dotenv.load_dotenv()
+dotend.load_dotenv()
 token = os.environ['TOKEN']
 print(token)
 
@@ -29,7 +29,7 @@ keyboard1.row('/start', '/help', '/weather', '/rzd', 'Казань', 'Москв
 keyboard1.row('/music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
-bot = telebot.TeleBot(Token)
+bot = telebot.TeleBot(token)
 
 fromplace = str()
 toplace = str()
