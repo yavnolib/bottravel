@@ -10,13 +10,13 @@ import reader
 
 commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/rzd' : 'rzd_message(message)', '/weather' : 'weather_message(message)'}
 
-# lovestickerpack = ['CAADAgAD-wUAAtJaiAEK_F4c8hn9yxYE', 'CAADAgADcgkAAgi3GQIEU9tYxpNH9xYE', 'CAADAgADEgYAAtJaiAH3r7K1PEN3dBYE', 'CAADAgADgQkAAgi3GQJMZcFWk15u8RYE', 'CAADAgADgwkAAgi3GQKYlDU84Ixx3RYE', 'CAADAgADGgYAAtJaiAEu2wLZUu4NEBYE', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBgADwDZPE8fKovSybnB2FgQ', 'CAADAgADFgADwDZPE2Ah1y2iBLZnFgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ']
+lovestickerpack = ['CAADAgAD-wUAAtJaiAEK_F4c8hn9yxYE', 'CAADAgADcgkAAgi3GQIEU9tYxpNH9xYE', 'CAADAgADEgYAAtJaiAH3r7K1PEN3dBYE', 'CAADAgADgQkAAgi3GQJMZcFWk15u8RYE', 'CAADAgADgwkAAgi3GQKYlDU84Ixx3RYE', 'CAADAgADGgYAAtJaiAEu2wLZUu4NEBYE', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBgADwDZPE8fKovSybnB2FgQ', 'CAADAgADFgADwDZPE2Ah1y2iBLZnFgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ']
 
-# questionstickerpack = ['CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADFwYAAtJaiAFCOa9AJUzy7RYE', 'CAADAgADLAYAAtJaiAES51iRyPvrxBYE', 'CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADdAAD9wLIDwfMgh3wvMzzFgQ', 'CAADAgADegkAAgi3GQI5G6atKdU53BYE']
+questionstickerpack = ['CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADFwYAAtJaiAFCOa9AJUzy7RYE', 'CAADAgADLAYAAtJaiAES51iRyPvrxBYE', 'CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADdAAD9wLIDwfMgh3wvMzzFgQ', 'CAADAgADegkAAgi3GQI5G6atKdU53BYE']
 
-# loadstickerpack = ['CAADAgADjwADFkJrCr24snHVnwbiFgQ', 'CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgADewAD9wLID0X7aCG8iMvfFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADkgADFkJrCqRKrRN_PIQxFgQ']
+loadstickerpack = ['CAADAgADjwADFkJrCr24snHVnwbiFgQ', 'CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgADewAD9wLID0X7aCG8iMvfFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADkgADFkJrCqRKrRN_PIQxFgQ']
 
-# angrystickerpack = ['CAADAgADywADVp29CllGpcs9gzQoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgADfQAD9wLIDy7JuwrdyyJJFgQ', 'CAADAgADnwADFkJrCg3fpq5eaUiCFgQ']
+angrystickerpack = ['CAADAgADywADVp29CllGpcs9gzQoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgADfQAD9wLIDy7JuwrdyyJJFgQ', 'CAADAgADnwADFkJrCg3fpq5eaUiCFgQ']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('/start', '/help', '/weather', '/rzd', 'Казань', 'Москва', '30.11.2019')
@@ -62,7 +62,7 @@ def date_registration(message):
     global loadsticerpack
     if message.text not in commandlist:
         dateregistration = message.text
-        # bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
+        bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
         Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
         bot.send_message(message.chat.id, 'Железнодорожные маршруты по вашим требованиям: '+"\n"+reader.read())
     else:
@@ -75,7 +75,7 @@ def start_message(message):
     global weatherinformation
     global lovestickerpack
     bot.send_message(message.chat.id, 'Привет!\nМеня зовут...плевать, я же тестовый бот\nВот список моих функций на данный момент:\n1./start\n2./weather\n3./help\n4./rzd', reply_markup=keyboard1)
-   # bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
+    bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
     
 @bot.message_handler(commands=['weather'])
 
@@ -106,7 +106,7 @@ def weather_information(message):
                 bot.send_message(message.from_user.id, "Погода-mood: Ты умрёшь, если уйдёшь")
         except pyowm.exceptions.api_response_error.NotFoundError:
             bot.reply_to(message, 'Врешь, такого города нет на картах')
-        #    bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
+            bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
     else:
         exec(commandlist[message.text])
     
@@ -114,7 +114,7 @@ def weather_information(message):
 def help_message(message):
     global lovestickerpack
     bot.send_message(message.chat.id, '1./start - эта функция позволяет Вам сбросить наш диалог и вернуться к исходной точке\n2./weather - позволяет вам узнать состояние погоды в данном месте\n3./help - эта  функция сработала прямо сейчас')
-  #  bot.send_sticker(message.chat.id,random.choice(lovestickerpack))
+    bot.send_sticker(message.chat.id,random.choice(lovestickerpack))
 @bot.message_handler(commands=['music'])
 def music(message):
     for i in range(3):
@@ -128,12 +128,12 @@ def text_analyze(message):
     global angrystickerpack
     global questionstickerpack
     if 'рустам' in message.text.lower():
-        bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте')
-       # bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
+        bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
+        bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
     elif 'арина' in message.text.lower() or 'ариша' in message.text.lower():
         bot.reply_to(message, 'арина...ариша...звучит как что-то неприятное')
-      #  bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
+        bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
     elif message.text.lower():
         bot.reply_to(message, 'я пока не в состоянии понять твои мысли')
-      #  bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
+        bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
 bot.polling()
