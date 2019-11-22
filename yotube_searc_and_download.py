@@ -391,7 +391,7 @@ if __name__ == '__main__':
         filename = r'c:\data\temp\youtube_searchlist.txt'
         keyword_list = get_searchlist_fr_file(filename)
         for search_key in keyword_list:
-            print search_key
+            print (search_key)
             yy = YouTubeHandler(search_key)
             yy.download_as_audio =0
             yy.enable_sorted_download = 0
