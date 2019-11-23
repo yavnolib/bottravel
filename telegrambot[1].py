@@ -14,7 +14,7 @@ token=load_dotenv()
 token = os.getenv('TOKEN')
 print(token)
 
-commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
+commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/finddirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
 
 lovestickerpack = []
 
@@ -25,7 +25,7 @@ loadstickerpack = []
 angrystickerpack = []
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('/start', '/help', '/weather', '/findirection', 'Казань', 'Москва', '30.11.2019')
+keyboard1.row('/start', '/help', '/weather', '/finddirection', 'Казань', 'Москва', '30.11.2019')
 keyboard1.row('/music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
@@ -36,7 +36,7 @@ toplace = str()
 dateregistration = str()
 status=''
 
-@bot.message_handler(commands=['findirection'])
+@bot.message_handler(commands=['finddirection'])
 
 def direction_message(message):
     bot.send_message(message.chat.id, 'Введите город отправления')
