@@ -127,7 +127,8 @@ def weather_information(message):
 			temp = weather.get_temperature('celsius')['temp']
 			wind = weather.get_wind()['speed']
 			print(weather)
-			bot.send_message(message.chat.id, "Погода города " + message.text + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
+			weathercity = message.text[0].upper() + message.text.lower()[1:]
+			bot.send_message(message.chat.id, "Погода города " + weathercity + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
 			if temp >= 15:
 				bot.send_message(message.chat.id, "Погода-mood: Cамое-то ")
 			elif 15 > temp  and temp > 0:
