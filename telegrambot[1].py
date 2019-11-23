@@ -16,13 +16,13 @@ print(token)
 
 commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
 
-lovestickerpack = ['CAADAgAD-wUAAtJaiAEK_F4c8hn9yxYE', 'CAADAgADcgkAAgi3GQIEU9tYxpNH9xYE', 'CAADAgADEgYAAtJaiAH3r7K1PEN3dBYE', 'CAADAgADgQkAAgi3GQJMZcFWk15u8RYE', 'CAADAgADgwkAAgi3GQKYlDU84Ixx3RYE', 'CAADAgADGgYAAtJaiAEu2wLZUu4NEBYE', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBgADwDZPE8fKovSybnB2FgQ', 'CAADAgADFgADwDZPE2Ah1y2iBLZnFgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ']
+lovestickerpack = []
 
-questionstickerpack = ['CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADFwYAAtJaiAFCOa9AJUzy7RYE', 'CAADAgADLAYAAtJaiAES51iRyPvrxBYE', 'CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADdAAD9wLIDwfMgh3wvMzzFgQ', 'CAADAgADegkAAgi3GQI5G6atKdU53BYE']
+questionstickerpack = []
 
-loadstickerpack = ['CAADAgADjwADFkJrCr24snHVnwbiFgQ', 'CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgADewAD9wLID0X7aCG8iMvfFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADkgADFkJrCqRKrRN_PIQxFgQ']
+loadstickerpack = []
 
-angrystickerpack = ['CAADAgADywADVp29CllGpcs9gzQoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgADfQAD9wLIDy7JuwrdyyJJFgQ', 'CAADAgADnwADFkJrCg3fpq5eaUiCFgQ']
+angrystickerpack = []
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('/start', '/help', '/weather', '/findirection', 'Казань', 'Москва', '30.11.2019')
@@ -55,7 +55,7 @@ def to_place_registration(message):
     global toplace
     if message.text not in commandlist:
         toplace = message.text
-        bot.send_message(message.chat.id, 'Введите дату отправления')
+        bot.send_message(message.chat.id, 'Введите дату отправления')#rzd
         bot.register_next_step_handler(message, date_registration)
     else:
         exec(commandlist[message.text])
@@ -132,7 +132,13 @@ def music_message(message):
         n=random.randint(1,2)
         audio = open(str(n)+".mp3", mode='rb')
         print("opened "+str(n)+".mp3")
-        bot.send_audio(message.from_user.id,audio, timeout=1000)  
+        bot.send_audio(message.from_user.id,audio, timeout=1000)
+
+
+@bot.message_handler(content_types=['sticker'])
+def sticker_analize(message):
+	print(message)
+
 @bot.message_handler(content_types=['text'])
 def text_analyze(message):
     global lovestickerpack
