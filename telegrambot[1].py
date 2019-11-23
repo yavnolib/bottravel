@@ -14,7 +14,7 @@ token=load_dotenv()
 token = os.getenv('TOKEN')
 print(token)
 
-commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findirections' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
+commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
 
 lovestickerpack = ['CAADAgAD-wUAAtJaiAEK_F4c8hn9yxYE', 'CAADAgADcgkAAgi3GQIEU9tYxpNH9xYE', 'CAADAgADEgYAAtJaiAH3r7K1PEN3dBYE', 'CAADAgADgQkAAgi3GQJMZcFWk15u8RYE', 'CAADAgADgwkAAgi3GQKYlDU84Ixx3RYE', 'CAADAgADGgYAAtJaiAEu2wLZUu4NEBYE', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBgADwDZPE8fKovSybnB2FgQ', 'CAADAgADFgADwDZPE2Ah1y2iBLZnFgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ']
 
@@ -25,7 +25,7 @@ loadstickerpack = ['CAADAgADjwADFkJrCr24snHVnwbiFgQ', 'CAADAgADGAADwDZPE9b6J7-ca
 angrystickerpack = ['CAADAgADywADVp29CllGpcs9gzQoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgADfQAD9wLIDy7JuwrdyyJJFgQ', 'CAADAgADnwADFkJrCg3fpq5eaUiCFgQ']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('/start', '/help', '/weather', '/findirections', 'Казань', 'Москва', '30.11.2019')
+keyboard1.row('/start', '/help', '/weather', '/findirection', 'Казань', 'Москва', '30.11.2019')
 keyboard1.row('/music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
@@ -36,7 +36,7 @@ toplace = str()
 dateregistration = str()
 status=''
 
-@bot.message_handler(commands=['findirections'])
+@bot.message_handler(commands=['findirection'])
 
 def direction_message(message):
     bot.send_message(message.chat.id, 'Введите город отправления')
