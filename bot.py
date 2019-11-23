@@ -141,11 +141,15 @@ def help_message(message):
     
 @bot.message_handler(commands=['music'])
 def music_message(message):
+	audiolist = []
 	for i in range(3):
-		n=random.randint(1,2)
-		audio = open(str(n)+".mp3", mode='rb')
-		print("opened "+str(n)+".mp3")
-		bot.send_audio(message.from_user.id,audio, timeout=1000)
+		while True:
+			n = random.randint(1,2)
+			if n not in audiolist:
+				break
+		audio = open(str(n) + ".mp3", mode='rb')
+		print("opened " + str(n) + ".mp3")
+		bot.send_audio(message.from_user.id, audio, timeout=1000)
 
 
 @bot.message_handler(content_types=['sticker'])
