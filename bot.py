@@ -147,6 +147,7 @@ def music_message(message):
 			n = random.randint(1,2)
 			if n not in audiolist:
 				break
+		audiolist.append(n)
 		audio = open(str(n) + ".mp3", mode='rb')
 		print("opened " + str(n) + ".mp3")
 		bot.send_audio(message.from_user.id, audio, timeout=1000)
