@@ -64,12 +64,12 @@ def date_registration(message):
     global loadsticerpack
     if message.text not in commandlist:
         dateregistration = message.text
-        bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
         print(fromplace)
         print(toplace)
         print(dateregistration)
         Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
         bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
+	bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
         bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
     else:
         exec(commandlist[message.text])    
