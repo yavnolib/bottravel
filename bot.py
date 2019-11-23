@@ -31,7 +31,8 @@ questionstickerpack = ['CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADEgADwDZPEzO8n
 angrystickerpack = ['CAADAgAD3AADVp29Cpy9Gm5Tg192FgQ', 'CAADAgAD2wADVp29Clxn-p9taVttFgQ', 'CAADAgADywADVp29CllGpcs9gzQoFgQ']
 loadstickerpack = ['CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ']
 developerslist = ['рустам', 'ярослав', 'владимир', 'даниэль', 'игорь']
-nongratlist = ['арина', 'ариша', 'алия']
+nongratlist = ['арина', 'ариша']
+gratlist = ['алия']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('start', 'help', 'weather', 'developers')
@@ -132,7 +133,7 @@ def date_registration(message):
 def start_message(message):
 	global weatherinformation
 	global lovestickerpack
-	bot.send_message(message.chat.id, 'Привет!\nМеня зовут...плевать, я же тестовый бот\nВот список моих функций на данный момент:\n1./start\n2./weather\n3./help\n4./rzd', reply_markup=keyboard1)
+	bot.send_message(message.chat.id, 'Привет!\nМеня зовут Travellta!....John Travellta!Да, я знаю, у меня красивое имя..;) \nВот список моих функций на данный момент:\n1./start\n2./weather\n3./help\n4./music', reply_markup=keyboard1)
 	bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
     
 @bot.message_handler(commands=['weather'])
@@ -220,4 +221,9 @@ def text_analyze(message):
 		bot.send_message(message.chat.id, 'Гигиена и косметика в поездку: \nбритва; дезодорант; зубная паста и щетка; расческа; ватные палочки, ватные диски; Влажные салфетки, бумажные платочки; гигиеническая помада, бальзам для губ; гигиенические прокладки, тампоны; дезинфицирующий гель для рук; зубная нить, зубочистки; крем от солнца; кремы для лица и тела; ножницы и пилочка для ногтей; очки или контактные линзы с контейнером и раствором; парфюм; пена для и после бритья; помада, тушь для ресниц и другая декоративная косметика, средство для снятия макияжа; презервативы; репеллент от комаров; средство для укладки волос; фумигатор; шампунь, кондиционер для волос, мыло, гель для душа, мочалка')
 
 		bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
+        elif message.text.lower() in gratlist:
+                bot.reply_to(message, "Алия... Алиюша... Звучит как что-то приятное.. ")
+                bot.send_sticker(message.chat.id, random.choice(loveatickerpack))
+        else:
+                pass
 bot.polling()
