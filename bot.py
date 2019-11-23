@@ -14,18 +14,18 @@ token=load_dotenv()
 token = os.getenv('TOKEN')
 print(token)
 
-commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/rzd' : 'rzd_message(message)', '/weather' : 'weather_message(message)'}
+commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
 
-lovestickerpack = ['CAADAgAD-wUAAtJaiAEK_F4c8hn9yxYE', 'CAADAgADcgkAAgi3GQIEU9tYxpNH9xYE', 'CAADAgADEgYAAtJaiAH3r7K1PEN3dBYE', 'CAADAgADgQkAAgi3GQJMZcFWk15u8RYE', 'CAADAgADgwkAAgi3GQKYlDU84Ixx3RYE', 'CAADAgADGgYAAtJaiAEu2wLZUu4NEBYE', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBgADwDZPE8fKovSybnB2FgQ', 'CAADAgADFgADwDZPE2Ah1y2iBLZnFgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ']
+lovestickerpack = []
 
-questionstickerpack = ['CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADFwYAAtJaiAFCOa9AJUzy7RYE', 'CAADAgADLAYAAtJaiAES51iRyPvrxBYE', 'CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADdAAD9wLIDwfMgh3wvMzzFgQ', 'CAADAgADegkAAgi3GQI5G6atKdU53BYE']
+questionstickerpack = []
 
-loadstickerpack = ['CAADAgADjwADFkJrCr24snHVnwbiFgQ', 'CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgADewAD9wLID0X7aCG8iMvfFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADkgADFkJrCqRKrRN_PIQxFgQ']
+loadstickerpack = []
 
-angrystickerpack = ['CAADAgADywADVp29CllGpcs9gzQoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgADfQAD9wLIDy7JuwrdyyJJFgQ', 'CAADAgADnwADFkJrCg3fpq5eaUiCFgQ']
+angrystickerpack = []
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('/start', '/help', '/weather', '/rzd', 'Казань', 'Москва', '30.11.2019')
+keyboard1.row('/start', '/help', '/weather', '/findirection', 'Казань', 'Москва', '30.11.2019')
 keyboard1.row('/music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
@@ -36,9 +36,9 @@ toplace = str()
 dateregistration = str()
 status=''
 
-@bot.message_handler(commands=['rzd'])
+@bot.message_handler(commands=['findirection'])
 
-def rzd_message(message):
+def direction_message(message):
     bot.send_message(message.chat.id, 'Введите город отправления')
     bot.register_next_step_handler(message, from_place_registration)
 def from_place_registration(message):
@@ -55,7 +55,7 @@ def to_place_registration(message):
     global toplace
     if message.text not in commandlist:
         toplace = message.text
-        bot.send_message(message.chat.id, 'Введите дату отправления')
+        bot.send_message(message.chat.id, 'Введите дату отправления')#rzd
         bot.register_next_step_handler(message, date_registration)
     else:
         exec(commandlist[message.text])
@@ -72,7 +72,8 @@ def date_registration(message):
         print(toplace)
         print(dateregistration)
         Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
-        bot.send_message(message.chat.id, 'Железнодорожные маршруты по вашим требованиям: '+"\n"+reader.read())
+        bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
+        bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
     else:
         exec(commandlist[message.text])    
     
@@ -103,15 +104,15 @@ def weather_information(message):
             temp = weather.get_temperature('celsius')['temp']
             wind = weather.get_wind()['speed']
             print(weather)
-            bot.send_message(message.from_user.id, "Погода города " + message.text + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
+            bot.send_message(message.chat.id, "Погода города " + message.text + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
             if temp >= 15:
-                bot.send_message(message.from_user.id, "Погода-mood: Cамое-то ")
+                bot.send_message(message.chat.id, "Погода-mood: Cамое-то ")
             elif 15 > temp  and temp > 0:
-                bot.send_message(message.from_user.id, "Погода-mood: Накинь что нибудь на себя ")
+                bot.send_message(message.chat.id, "Погода-mood: Накинь что нибудь на себя ")
             elif temp < 0 and -25 < temp:
-                bot.send_message(message.from_user.id, "Погода-mood: Одевайся мать, пора воевать ")
+                bot.send_message(message.chat.id, "Погода-mood: Одевайся мать, пора воевать ")
             elif temp <= -25:
-                bot.send_message(message.from_user.id, "Погода-mood: Ты умрёшь, если уйдёшь")
+                bot.send_message(message.chat.id, "Погода-mood: Ты умрёшь, если уйдёшь")
         except pyowm.exceptions.api_response_error.NotFoundError:
             bot.reply_to(message, 'Врешь, такого города нет на картах')
             bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
@@ -123,13 +124,21 @@ def help_message(message):
     global lovestickerpack
     bot.send_message(message.chat.id, '1./start - эта функция позволяет Вам сбросить наш диалог и вернуться к исходной точке\n2./weather - позволяет вам узнать состояние погоды в данном месте\n3./help - эта  функция сработала прямо сейчас')
     bot.send_sticker(message.chat.id,random.choice(lovestickerpack))
+    
+    
 @bot.message_handler(commands=['music'])
-def music(message):
+def music_message(message):
     for i in range(3):
-        n=random.randint(1,11)
+        n=random.randint(1,2)
         audio = open(str(n)+".mp3", mode='rb')
         print("opened "+str(n)+".mp3")
-        bot.send_audio(message.from_user.id,audio, timeout=1000)  
+        bot.send_audio(message.from_user.id,audio, timeout=1000)
+
+
+@bot.message_handler(content_types=['sticker'])
+def sticker_analize(message):
+	print(message)
+
 @bot.message_handler(content_types=['text'])
 def text_analyze(message):
     global lovestickerpack
