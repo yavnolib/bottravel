@@ -14,15 +14,17 @@ token=load_dotenv()
 token = os.getenv('TOKEN')
 print(token)
 
-commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/finddirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
-commandlist_ru = {'старт': 'start_message(message)', 'помощь' : 'help_message(message)', 'маршрут' : 'direction_message(message)', 'погода' : 'weather_message(message)', 'музыка' : 'music_message(message)'}
+commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/findtickets' : 'tickets_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)', '/developers' : 'developers_message(message)'}
+commandlist_ru = {'старт': 'start_message(message)', 'помощь' : 'help_message(message)', 'маршрут' : 'tickets_message(message)', 'погода' : 'weather_message(message)', 'музыка' : 'music_message(message)', 'разработчики' : 'developers_message(message)'}
 lovestickerpack = ['CAADAgAD2QADVp29CtGSZtLSYweoFgQ', 'CAADAgAD0gADVp29Cg4FcjZ1gzWKFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ', 'CAADAgAD2AADVp29CokJ3b9L8RQnFgQ', 'CAADAgAD3gADVp29CqXvdzhVgxXEFgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgADHQADwDZPE17YptxBPd5IFgQ', 'CAADAgAD4QcAAnlc4gndRsN-Tyzk1xYE', 'CAADAgAD3wcAAnlc4gmeYgfVO_CEsxYE', 'CAADAgAD4AcAAnlc4gmXqeueTbWXlRYE', ]
 questionstickerpack = ['CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgAD2wcAAnlc4gkSqCLudDgLbhYE', 'CAADAgADzwcAAnlc4gnrZCnufdBTahYE', 'CAADAgAD2QcAAnlc4gn3Ww8qzk3S3BYE', 'CAADAgAD0gcAAnlc4gmLqZ82yF4OlxYE']
 angrystickerpack = ['CAADAgAD3AADVp29Cpy9Gm5Tg192FgQ', 'CAADAgAD2wADVp29Clxn-p9taVttFgQ', 'CAADAgADywADVp29CllGpcs9gzQoFgQ']
 loadstickerpack = ['CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ']
+developers = ['рустам', 'ярослав', 'владимир', 'даниэль', 'игорь']
+nongratlist = ['арина', 'ариша', 'алия']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('start', 'help', 'weather', 'finddirection', 'Казань', 'Москва', '30.11.2019')
+keyboard1.row('start', 'help', 'weather', 'findtickets', 'developers')
 keyboard1.row('music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
@@ -33,12 +35,18 @@ toplace = str()
 dateregistration = str()
 status=''
 
-@bot.message_handler(commands=['finddirection'])
+@bot.message_handler(commands=['developers'])
+def developers_message(message):
+	print('пока в разработке')
 
-def direction_message(message):
+
+@bot.message_handler(commands=['findtickets'])
+
+def tickets_message(message):
 	bot.send_message(message.chat.id, 'Введите город отправления')
-	bot.register_next_step_handler(message, from_place_registration)
-def from_place_registration(message):
+	bot.register_next_step_handler(message, fromplace_registration)
+	
+def fromplace_registration(message):
 	global commandlist
 	global fromplace
 	if message.text.lower() in commandlist:
@@ -50,8 +58,8 @@ def from_place_registration(message):
 	else:
 		fromplace = message.text.lower()
 		bot.send_message(message.chat.id, 'Введите город назначения')
-		bot.register_next_step_handler(message, to_place_registration)
-def to_place_registration(message):
+		bot.register_next_step_handler(message, toplace_registration)
+def toplace_registration(message):
 	global commandlist
 	global toplace
 	if message.text.lower() in commandlist:
@@ -152,27 +160,24 @@ def music_message(message):
 		print("opened " + str(n) + ".mp3")
 		bot.send_audio(message.from_user.id, audio, timeout=1000)
 
-
-@bot.message_handler(content_types=['sticker'])
-def sticker_analize(message):
-	print(message)
-
 @bot.message_handler(content_types=['text'])
 def text_analyze(message):
 	global lovestickerpack
 	global angrystickerpack
 	global questionstickerpack
 	if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
-		bot.register_next_step_handler(message, direction_message)
+		bot.register_next_step_handler(message, tickets_message)
 	elif '/' + message.text.lower() in commandlist:
 		exec(commandlist['/' + message.text.lower()])
 	elif message.text.lower() in commandlist_ru:
 		exec(commandlist_ru[message.text.lower()])
-	elif 'рустам' in message.text.lower():
-		bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
+	elif message.text.lower() in developerslist:
+		developername = message.text[0].upper() + message.text.lower[1:]
+		bot.reply_to(message, 'в моей системе рейтинга {0} стоит на первом месте'.format(developername))
 		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
-	elif 'арина' in message.text.lower() or 'ариша' in message.text.lower():
-		bot.reply_to(message, 'арина...ариша...звучит как что-то неприятное')
+	elif message.text.lower() in nongratlist:
+		nongratname = message.text[0].upper() + message.text.lower()[1:]
+		bot.reply_to(message, '{0}...{0}...звучит как что-то неприятное'.format(nongratname))
 		bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
 	elif message.text.lower():
 		bot.reply_to(message, 'RUSSIAN, MOTHERFUCKER, DO YOU SPEAK IT ?')
