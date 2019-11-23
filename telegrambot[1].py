@@ -73,7 +73,7 @@ def date_registration(message):
         print(dateregistration)
         Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
         bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
-        bot.send_message(message.chat.id, 'Железнодорожные маршруты по вашим требованиям: '+"\n"+reader.read())
+        bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
     else:
         exec(commandlist[message.text])    
     
