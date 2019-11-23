@@ -37,7 +37,10 @@ keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('start', 'help', 'weather', 'developers')
 keyboard1.row('music', 'findtickets', 'taxi')
 
-owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
+tok=load_dotenv()
+tok=os.getenv("owm")
+print(tok)
+owm = pyowm.OWM(tok, language = 'ru')
 bot = telebot.TeleBot(token)
 
 fromplace = str()
