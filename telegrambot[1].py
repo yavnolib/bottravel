@@ -59,7 +59,10 @@ def taxi_telephone_numbers_message(message):
 		exec(commandlist['/' + message.text.lower()])
 	else:
 		global taxidict
-		bot.send_message(message.chat.id, taxidict[message.text.lower()])
+		ttnumbers = taxidict[message.text.lower()]
+		ttnumbers = ttnumbers.split('. ')
+		ttnumbers = '\n'.join(ttnumbers)
+		bot.send_message(message.chat.id, ttnumbers])
 	
 @bot.message_handler(commands=['developers'])
 def developers_message(message):
