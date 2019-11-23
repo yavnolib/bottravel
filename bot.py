@@ -15,7 +15,7 @@ token = os.getenv('TOKEN')
 print(token)
 
 commandlist = {'/start': 'start_message(message)', '/help' : 'help_message(message)', '/finddirection' : 'direction_message(message)', '/weather' : 'weather_message(message)', '/music' : 'music_message(message)'}
-
+commandlist_ru = {'старт': 'start_message(message)', 'помощь' : 'help_message(message)', 'маршрут' : 'direction_message(message)', 'погода' : 'weather_message(message)', 'музыка' : 'music_message(message)'}
 lovestickerpack = ['CAADAgAD2QADVp29CtGSZtLSYweoFgQ', 'CAADAgAD0gADVp29Cg4FcjZ1gzWKFgQ', 'CAADAgAD0wADVp29CvUyj5fVEvk9FgQ', 'CAADAgAD2AADVp29CokJ3b9L8RQnFgQ', 'CAADAgAD3gADVp29CqXvdzhVgxXEFgQ', 'CAADAgADFQADwDZPE81WpjthnmTnFgQ', 'CAADAgADBQADwDZPE_lqX5qCa011FgQ', 'CAADAgADDQADwDZPE6T54fTUeI1TFgQ', 'CAADAgADHQADwDZPE17YptxBPd5IFgQ', 'CAADAgAD4QcAAnlc4gndRsN-Tyzk1xYE', 'CAADAgAD3wcAAnlc4gmeYgfVO_CEsxYE', 'CAADAgAD4AcAAnlc4gmXqeueTbWXlRYE', ]
 questionstickerpack = ['CAADAgAD4wADVp29Cg_4Isytpgs3FgQ', 'CAADAgADEgADwDZPEzO8ngEulQc3FgQ', 'CAADAgADEAADwDZPE-qBiinxHwLoFgQ', 'CAADAgADIAADwDZPE_QPK7o-X_TPFgQ', 'CAADAgAD2wcAAnlc4gkSqCLudDgLbhYE', 'CAADAgADzwcAAnlc4gnrZCnufdBTahYE', 'CAADAgAD2QcAAnlc4gn3Ww8qzk3S3BYE', 'CAADAgAD0gcAAnlc4gmLqZ82yF4OlxYE']
 angrystickerpack = ['CAADAgAD3AADVp29Cpy9Gm5Tg192FgQ', 'CAADAgAD2wADVp29Clxn-p9taVttFgQ', 'CAADAgADywADVp29CllGpcs9gzQoFgQ']
@@ -41,38 +41,50 @@ def direction_message(message):
 def from_place_registration(message):
 	global commandlist
 	global fromplace
-	if message.text not in commandlist:
-		fromplace = message.text
+	if message.text.lower() in commandlist:
+		exec(commandlist[message.text.lower()])
+	elif message.text.lower() in commandlist_ru:
+		exec(commandlist_ru[message.text.lower()])
+	elif '/' + message.text.lower() in commandlist:
+		exec(commandlist['/' + message.text.lower()])
+	else:
+		fromplace = message.text.lower()
 		bot.send_message(message.chat.id, 'Введите город назначения')
 		bot.register_next_step_handler(message, to_place_registration)
-	else:
-		exec(commandlist[message.text])
 def to_place_registration(message):
 	global commandlist
 	global toplace
-	if message.text not in commandlist:
-		toplace = message.text
+	if message.text.lower() in commandlist:
+		exec(commandlist[message.text.lower()])
+	elif message.text.lower() in commandlist_ru:
+		exec(commandlist_ru[message.text.lower()])
+	elif '/' + message.text.lower() in commandlist:
+		exec(commandlist['/' + message.text.lower()])
+	else:
+		toplace = message.text.lower()
 		bot.send_message(message.chat.id, 'Введите дату отправления')#rzd
 		bot.register_next_step_handler(message, date_registration)
-	else:
-		exec(commandlist[message.text])
 def date_registration(message):
 	global commandlist
 	global fromplace
 	global toplace
 	global dateregistration
 	global loadsticerpack
-	if message.text not in commandlist:
-		dateregistration = message.text
+	if message.text.lower() in commandlist:
+		exec(commandlist[message.text.lower()])
+	elif message.text.lower() in commandlist_ru:
+		exec(commandlist_ru[message.text.lower()])
+	elif '/' + message.text.lower() in commandlist:
+		exec(commandlist['/' + message.text.lower()])
+	else:
+		dateregistration = message.text.lower()
 		print(fromplace)
 		print(toplace)
 		print(dateregistration)
 		Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
 		bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
 		bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
-		bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
-	else:
-		exec(commandlist[message.text])    
+		bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())   
     
     
 @bot.message_handler(commands=['start'])
@@ -92,7 +104,13 @@ def weather_information(message):
 	place=''
 	global status
 	global angrystickerpack
-	if message.text not in commandlist:
+	if message.text.lower() in commandlist:
+		exec(commandlist[message.text.lower()])
+	elif message.text.lower() in commandlist_ru:
+		exec(commandlist_ru[message.text.lower()])
+	elif '/' + message.text.lower() in commandlist:
+		exec(commandlist['/' + message.text.lower()])
+	else:
 		try:
 			place = message.text.lower()
 			observation = owm.weather_at_place(place)
@@ -113,8 +131,6 @@ def weather_information(message):
 		except pyowm.exceptions.api_response_error.NotFoundError:
 			bot.reply_to(message, 'Врешь, такого города нет на картах')
 			bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
-	else:
-		exec(commandlist[message.text])
     
 @bot.message_handler(commands=['help'])
 def help_message(message):
@@ -145,6 +161,8 @@ def text_analyze(message):
 		bot.register_next_step_handler(message, direction_message)
 	elif '/' + message.text.lower() in commandlist:
 		exec(commandlist['/' + message.text.lower()])
+	elif message.text.lower() in commandlist_ru:
+		exec(commandlist_ru[message.text.lower()])
 	elif 'рустам' in message.text.lower():
 		bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
 		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
@@ -152,6 +170,6 @@ def text_analyze(message):
 		bot.reply_to(message, 'арина...ариша...звучит как что-то неприятное')
 		bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
 	elif message.text.lower():
-		bot.reply_to(message, 'я пока не в состоянии понять твои мысли')
+		bot.reply_to(message, 'RUSSIAN, MOTHERFUCKER, DO YOU SPEAK IT ?')
 		bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
 bot.polling()
