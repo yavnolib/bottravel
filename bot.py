@@ -22,8 +22,8 @@ angrystickerpack = ['CAADAgAD3AADVp29Cpy9Gm5Tg192FgQ', 'CAADAgAD2wADVp29Clxn-p9t
 loadstickerpack = ['CAADAgADGAADwDZPE9b6J7-cahj4FgQ', 'CAADAgAD1QADVp29CveXwRdcmk7nFgQ', 'CAADAgADwAADVp29Ct1dnTI9q-YvFgQ', 'CAADAgAD4QADVp29ClvBlItA-NOgFgQ', 'CAADAgAD5QADVp29CggLFmSVBdGKFgQ']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('/start', '/help', '/weather', '/finddirection', 'Казань', 'Москва', '30.11.2019')
-keyboard1.row('/music')
+keyboard1.row('start', 'help', 'weather', 'finddirection', 'Казань', 'Москва', '30.11.2019')
+keyboard1.row('music')
 
 owm = pyowm.OWM('6d00d1d4e704068d70191bad2673e0cc', language = 'ru')
 bot = telebot.TeleBot(token)
@@ -142,7 +142,9 @@ def text_analyze(message):
     global angrystickerpack
     global questionstickerpack
     if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
-		bot.register_next_step_handler(message, direction_message)
+	bot.register_next_step_handler(message, direction_message)
+    elif message.text.lower()[1:] in commandlist:
+	exec(commandlist[message.text[1:]])
     elif 'рустам' in message.text.lower():
         bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
         bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
