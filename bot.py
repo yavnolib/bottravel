@@ -143,8 +143,8 @@ def text_analyze(message):
 	global questionstickerpack
 	if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
 		bot.register_next_step_handler(message, direction_message)
-	elif message.text.lower()[1:] in commandlist:
-		exec(commandlist[message.text[1:]])
+	elif '/' + message.text.lower() in commandlist:
+		exec(commandlist['/' + message.text.lower()])
 	elif 'рустам' in message.text.lower():
 		bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
 		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
