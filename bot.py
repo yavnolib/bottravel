@@ -141,7 +141,9 @@ def text_analyze(message):
     global lovestickerpack
     global angrystickerpack
     global questionstickerpack
-    if 'рустам' in message.text.lower():
+    if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
+		bot.register_next_step_handler(message, direction_message)
+    elif 'рустам' in message.text.lower():
         bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
         bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
     elif 'арина' in message.text.lower() or 'ариша' in message.text.lower():
