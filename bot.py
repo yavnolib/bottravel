@@ -36,100 +36,100 @@ status=''
 @bot.message_handler(commands=['finddirection'])
 
 def direction_message(message):
-    bot.send_message(message.chat.id, 'Введите город отправления')
-    bot.register_next_step_handler(message, from_place_registration)
+	bot.send_message(message.chat.id, 'Введите город отправления')
+	bot.register_next_step_handler(message, from_place_registration)
 def from_place_registration(message):
-    global commandlist
-    global fromplace
-    if message.text not in commandlist:
-        fromplace = message.text
-        bot.send_message(message.chat.id, 'Введите город назначения')
-        bot.register_next_step_handler(message, to_place_registration)
-    else:
-        exec(commandlist[message.text])
+	global commandlist
+	global fromplace
+	if message.text not in commandlist:
+		fromplace = message.text
+		bot.send_message(message.chat.id, 'Введите город назначения')
+		bot.register_next_step_handler(message, to_place_registration)
+	else:
+		exec(commandlist[message.text])
 def to_place_registration(message):
-    global commandlist
-    global toplace
-    if message.text not in commandlist:
-        toplace = message.text
-        bot.send_message(message.chat.id, 'Введите дату отправления')#rzd
-        bot.register_next_step_handler(message, date_registration)
-    else:
-        exec(commandlist[message.text])
+	global commandlist
+	global toplace
+	if message.text not in commandlist:
+		toplace = message.text
+		bot.send_message(message.chat.id, 'Введите дату отправления')#rzd
+		bot.register_next_step_handler(message, date_registration)
+	else:
+		exec(commandlist[message.text])
 def date_registration(message):
-    global commandlist
-    global fromplace
-    global toplace
-    global dateregistration
-    global loadsticerpack
-    if message.text not in commandlist:
-        dateregistration = message.text
-        print(fromplace)
-        print(toplace)
-        print(dateregistration)
-        Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
-        bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
-	bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
-        bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
-    else:
-        exec(commandlist[message.text])    
+	global commandlist
+	global fromplace
+	global toplace
+	global dateregistration
+	global loadsticerpack
+	if message.text not in commandlist:
+		dateregistration = message.text
+		print(fromplace)
+		print(toplace)
+		print(dateregistration)
+		Sendler(fromInput=fromplace,fromOutput=toplace,date=dateregistration).send()
+		bot.send_message(message.chat.id, 'Ищу билеты по выбранному направлению')
+		bot.send_sticker(message.chat.id, random.choice(loadstickerpack))
+		bot.send_message(message.chat.id, 'Билеты по маршруту {0} - {1} на {2} '.format(fromplace, toplace, dateregistration) + "\n" + reader.read())
+	else:
+		exec(commandlist[message.text])    
     
     
 @bot.message_handler(commands=['start'])
 
 def start_message(message):
-    global weatherinformation
-    global lovestickerpack
-    bot.send_message(message.chat.id, 'Привет!\nМеня зовут...плевать, я же тестовый бот\nВот список моих функций на данный момент:\n1./start\n2./weather\n3./help\n4./rzd', reply_markup=keyboard1)
-    bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
+	global weatherinformation
+	global lovestickerpack
+	bot.send_message(message.chat.id, 'Привет!\nМеня зовут...плевать, я же тестовый бот\nВот список моих функций на данный момент:\n1./start\n2./weather\n3./help\n4./rzd', reply_markup=keyboard1)
+	bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
     
 @bot.message_handler(commands=['weather'])
 
 def weather_message(message):
-    bot.send_message(message.chat.id, 'Ну давай')
-    bot.register_next_step_handler(message, weather_information)
+	bot.send_message(message.chat.id, 'Ну давай')
+	bot.register_next_step_handler(message, weather_information)
 def weather_information(message):
-    place=''
-    global status
-    global angrystickerpack
-    if message.text not in commandlist:
-        try:
-            place = message.text.lower()
-            observation = owm.weather_at_place(place)
-            weather = observation.get_weather()
-            status = weather.get_detailed_status()
-            temp = weather.get_temperature('celsius')['temp']
-            wind = weather.get_wind()['speed']
-            print(weather)
-            bot.send_message(message.chat.id, "Погода города " + message.text + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
-            if temp >= 15:
-                bot.send_message(message.chat.id, "Погода-mood: Cамое-то ")
-            elif 15 > temp  and temp > 0:
-                bot.send_message(message.chat.id, "Погода-mood: Накинь что нибудь на себя ")
-            elif temp < 0 and -25 < temp:
-                bot.send_message(message.chat.id, "Погода-mood: Одевайся мать, пора воевать ")
-            elif temp <= -25:
-                bot.send_message(message.chat.id, "Погода-mood: Ты умрёшь, если уйдёшь")
-        except pyowm.exceptions.api_response_error.NotFoundError:
-            bot.reply_to(message, 'Врешь, такого города нет на картах')
-            bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
-    else:
-        exec(commandlist[message.text])
+	place=''
+	global status
+	global angrystickerpack
+	if message.text not in commandlist:
+		try:
+			place = message.text.lower()
+			observation = owm.weather_at_place(place)
+			weather = observation.get_weather()
+			status = weather.get_detailed_status()
+			temp = weather.get_temperature('celsius')['temp']
+			wind = weather.get_wind()['speed']
+			print(weather)
+			bot.send_message(message.chat.id, "Погода города " + message.text + "\nТемпература: " + str(temp) + "°C" + "\nНа улице: " + str.title(status) + "\nСкорость Ветра: " + str(wind) + "м/c")
+			if temp >= 15:
+				bot.send_message(message.chat.id, "Погода-mood: Cамое-то ")
+			elif 15 > temp  and temp > 0:
+				bot.send_message(message.chat.id, "Погода-mood: Накинь что нибудь на себя ")
+			elif temp < 0 and -25 < temp:
+				bot.send_message(message.chat.id, "Погода-mood: Одевайся мать, пора воевать ")
+			elif temp <= -25:
+				bot.send_message(message.chat.id, "Погода-mood: Ты умрёшь, если уйдёшь")
+		except pyowm.exceptions.api_response_error.NotFoundError:
+			bot.reply_to(message, 'Врешь, такого города нет на картах')
+			bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
+	else:
+		exec(commandlist[message.text])
     
 @bot.message_handler(commands=['help'])
 def help_message(message):
-    global lovestickerpack
-    bot.send_message(message.chat.id, '1./start - эта функция позволяет Вам сбросить наш диалог и вернуться к исходной точке\n2./weather - позволяет вам узнать состояние погоды в данном месте\n3./help - эта  функция сработала прямо сейчас')
-    bot.send_sticker(message.chat.id,random.choice(lovestickerpack))
+	global lovestickerpack
+	bot.send_message(message.chat.id, '1./start - эта функция позволяет Вам сбросить наш диалог и вернуться к исходной точке\n2./weather - позволяет вам узнать состояние погоды в данном месте\n3./help - эта  функция сработала прямо сейчас')
+	bot.send_sticker(message.chat.id,random.choice(lovestickerpack))
     
     
 @bot.message_handler(commands=['music'])
 def music_message(message):
-    for i in range(3):
-        n=random.randint(1,2)
-        audio = open(str(n)+".mp3", mode='rb')
-        print("opened "+str(n)+".mp3")
-        bot.send_audio(message.from_user.id,audio, timeout=1000)
+	for i in range(3):
+		n=random.randint(1,2)
+		audio = open(str(n)+".mp3", mode='rb')
+		print("opened "+str(n)+".mp3")
+		bot.send_audio(message.from_user.id,audio, timeout=1000)
 
 
 @bot.message_handler(content_types=['sticker'])
@@ -138,20 +138,20 @@ def sticker_analize(message):
 
 @bot.message_handler(content_types=['text'])
 def text_analyze(message):
-    global lovestickerpack
-    global angrystickerpack
-    global questionstickerpack
-    if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
-	bot.register_next_step_handler(message, direction_message)
-    elif message.text.lower()[1:] in commandlist:
-	exec(commandlist[message.text[1:]])
-    elif 'рустам' in message.text.lower():
-        bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
-        bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
-    elif 'арина' in message.text.lower() or 'ариша' in message.text.lower():
-        bot.reply_to(message, 'арина...ариша...звучит как что-то неприятное')
-        bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
-    elif message.text.lower():
-        bot.reply_to(message, 'я пока не в состоянии понять твои мысли')
-        bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
+	global lovestickerpack
+	global angrystickerpack
+	global questionstickerpack
+	if 'билеты' in message.text.lower() or 'найти билеты' in message.text.lower():
+		bot.register_next_step_handler(message, direction_message)
+	elif message.text.lower()[1:] in commandlist:
+		exec(commandlist[message.text[1:]])
+	elif 'рустам' in message.text.lower():
+		bot.reply_to(message, 'в моей системе рейтинга "Рустам" стоит на первом месте, если не считать всех других членов команды')
+		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
+	elif 'арина' in message.text.lower() or 'ариша' in message.text.lower():
+		bot.reply_to(message, 'арина...ариша...звучит как что-то неприятное')
+		bot.send_sticker(message.chat.id, random.choice(angrystickerpack))
+	elif message.text.lower():
+		bot.reply_to(message, 'я пока не в состоянии понять твои мысли')
+		bot.send_sticker(message.chat.id, random.choice(questionstickerpack))
 bot.polling()
