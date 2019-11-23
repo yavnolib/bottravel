@@ -106,7 +106,7 @@ def start_message(message):
 @bot.message_handler(commands=['weather'])
 
 def weather_message(message):
-	bot.send_message(message.chat.id, 'Ну давай')
+	bot.send_message(message.chat.id, 'Напишите город, погодные условия которого вы хотели бы узнать')
 	bot.register_next_step_handler(message, weather_information)
 def weather_information(message):
 	place=''
