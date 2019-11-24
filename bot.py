@@ -220,6 +220,7 @@ def text_analyze(message):
 		exec(commandlist_ru[message.text.lower()])
 	elif message.text.lower() in developerslist:
 		developername = message.text[0].upper() + message.text.lower[1:]
+		print(developername)
 		bot.reply_to(message, 'в моей системе рейтинга {0} стоит на первом месте'.format(developername))
 		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
 	elif message.text.lower() in nongratlist:
