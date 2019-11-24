@@ -35,8 +35,8 @@ nongratlist = ['арина', 'ариша']
 gratlist = ['алия']
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
-keyboard1.row('start', 'help', 'weather', 'developers')
-keyboard1.row('music', 'findtickets', 'taxi', 'suitcase')
+keyboard1.row('старт', 'помощь', 'погода', 'разработчики')
+keyboard1.row('музыка', 'билеты', 'такси', 'чемодан')
 
 tok=load_dotenv()
 tok=os.getenv("owm")
