@@ -71,11 +71,14 @@ def taxi_telephone_numbers_message(message):
 	elif '/' + message.text.lower() in commandlist:
 		exec(commandlist['/' + message.text.lower()])
 	else:
-		global taxidict
-		ttnumbers = taxidict[message.text.lower()]
-		ttnumbers = ttnumbers.split('. ')
-		ttnumbers = '\n'.join(ttnumbers)
-		bot.send_message(message.chat.id, ttnumbers)
+		try:
+			global taxidict
+			ttnumbers = taxidict[message.text.lower()]
+			ttnumbers = ttnumbers.split('. ')
+			ttnumbers = '\n'.join(ttnumbers)
+			bot.send_message(message.chat.id, ttnumbers)
+		except:
+			bot.send_message(message.chat.id, 'Боюсь, что даже мистер Вульф не сможет туда доехать')
 	
 @bot.message_handler(commands=['developers'])
 def developers_message(message):
@@ -101,6 +104,7 @@ def fromplace_registration(message):
 		fromplace = message.text.lower()
 		bot.send_message(message.chat.id, 'Введите город назначения')
 		bot.register_next_step_handler(message, toplace_registration)
+		
 def toplace_registration(message):
 	global commandlist
 	global toplace
@@ -226,6 +230,6 @@ def text_analyze(message):
 		bot.reply_to(message,"Алия.....Алиюша...звучит как что-то приятное)))")
 		bot.send_sticker(message.chat.id, random.choice(lovestickerpack))
 	else:
-	    bot.reply_to(message, 'RUSSIAN, MOTHERFUCKER, DO YOU SPEAK IT ?')
-	    bot.send_sticker(message.chat.id, random.choice(questionstickerpack))	    
+		bot.reply_to(message, 'RUSSIAN, MOTHERFUCKER, DO YOU SPEAK IT ?')
+		bot.send_sticker(message.chat.id, random.choice(questionstickerpack))	    
 bot.polling()
